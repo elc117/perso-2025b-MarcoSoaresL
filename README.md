@@ -140,16 +140,21 @@ list compreenshion (depois de errar na prova)
 diversas operações envolvendo listas
 
 ## Vídeo do programa
-
+<img src="./pastas/video.gif" width="500">
 ## Execução do programa
 Back-end:
+
 stack build --dependencies-only
+
 stack build
+
 stack run
 
 Front end:
 elm make src/Main.elm --output=index.html
+
 Abrir index.html
+
 ## Referências
 https://github.com/elc117/perso-2024b-luizamanoelle/tree/main
 https://github.com/elc117/perso-2024b-fennerspohr/tree/main
