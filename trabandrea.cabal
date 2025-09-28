@@ -1,0 +1,63 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.38.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           trabandrea
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/trabandrea#readme>
+homepage:       https://github.com/githubuser/trabandrea#readme
+bug-reports:    https://github.com/githubuser/trabandrea/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2024 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/trabandrea
+
+executable trabandrea-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_trabandrea
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , postgresql-simple
+    , scotty
+    , text
+    , transformers
+    , wai-cors
+    , wai-extra
+  default-language: Haskell2010
+
+test-suite trabandrea-test
+  type: exitcode-stdio-1.0
+  main-is: TesteFunc.hs
+  other-modules:
+      Paths_trabandrea
+  hs-source-dirs:
+      test
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , aeson
+    , base >=4.7 && <5
+    , hspec
+    , postgresql-simple
+    , scotty
+    , text
+    , transformers
+    , wai-cors
+    , wai-extra
+  default-language: Haskell2010
