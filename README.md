@@ -166,6 +166,9 @@ elm make src/Main.elm --output=index.html
 
 Abrir index.html
 
+Testes:
+ stack test
+
 ## Referências
 https://github.com/elc117/perso-2024b-luizamanoelle/tree/main
 https://github.com/elc117/perso-2024b-fennerspohr/tree/main
