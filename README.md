@@ -22,8 +22,14 @@ A imagem a seguir apresenta a janela para equipar as runas no jogo, acredito que
 ### Instalação e Configuração
 
 Aqui acredito que foi um ponto de bastante dificuldade, tive bastante erros seguindo tutoriais e tentando entender o funcionamento do Scotty. Para resolver isso observei bastante os códigos dos colegas do ano passado, me inspirando principalmente na implementação do Scotty feita pela Luiza Manoelle (https://github.com/elc117/perso-2024b-luizamanoelle/tree/main)
+
+
 Todo o setup e montagem do ambiente Haskell foi feito utilizando o Stack (https://docs.haskellstack.org/en/stable/), o que facilitou completamente, uma vez que ele monta todos os arquivos e o diretório já fica organizado corretamente.
+
+
 Depois disso, entramos em uma das partes que eu tive maior dificuldade no trabalho, a conexão do Banco de Dados com o Haskell, primeiro a minha ideia era realizar a conexão com o BD, pegar as runas, fechar a conexão e ligar o servidor Scotty, mas posteriormente eu vi que não era possível dessa forma, sendo necessário manter os dois ativos, pelo que eu entendi. Dentro disso, foi necessário entender a ordem desses fatores, o que gerou alguns erros durante o caminho.
+
+
 Por último, a instalação do Elm foi bastante simples, apenas baixando o executável no próprio site da ferramenta (https://elm-lang.org/).
 
 ### Instalação e Configuração
@@ -75,7 +81,9 @@ Primeiramente, temos a nossa "struct" pensando em C, aqui a gente implementa pra
       ]
 ```
 O primeiro processamento é feito quando chamamos a função controle_tipo_mob. Essa função recebe três parâmetros, o objetivo da runa (Atk,def,etc), uma lista de runas (contendo todas as runas do banco de dados) e uma outra string contendo o seet da runa (Violent, Swift, etc). Se essa string for igual a "Sem_seet" então ele não faz nada e passa a lista sem alterações, caso contrário, por exemplo, a string recebida seja "Violent", ele filtra mantendo apenas as runas desse tipo.
+
 Na Segunda parte da função, a gente identifica o objetivo da runa (== ATK) e chama a próxima função (controle_top10) passando o objetivo. O último caso nunca vai acontecer, uma vez que a string é passada pelo front que são botões, mas no haskell a sintaxe do if obriga a ter um else no final.
+
 ```haskell
  controle_tipo_mob :: String -> [Rune] -> String -> [[Rune]]
   controle_tipo_mob stat runas seet =
@@ -98,6 +106,7 @@ controle_top10 stat runas = map (ordena_pega10 stat) (separarPorSlots runas)
 
 Rápida observação: Explicar essa função me lembrou que há vários problemas de indentação que ocorreram e eu realmente não consegui visualizar o motivo, aparentemente estava tudo correto.
 A primeira função executada é o somador, que chama outras duas funções, em síntese, a gente soma o main status com o substatus, se eles forem do tipo desejado.
+
 Depois utilizamos o comparing, que é apenas açcar sintético do haskell, e ordenamos essa lista de runas, posteriormente, utilizamos o reverse para inverter a lista e o take 10 para pegar as 10 primeiras runas, que terão os maiores valores do stat desejado.
 
 ```haskell
@@ -105,7 +114,9 @@ Depois utilizamos o comparing, que é apenas açcar sintético do haskell, e ord
   ordena_pega10 stat runas = take 10 $ reverse $ sortBy (comparing (somador_main_sub stat)) runas 
 ```
 
-Nesse momento, terminamos as filtragens das runas, chamando a função realiza combinação. Essa é a função mais complicada do código, ela recebe uma lista de runas, do tipo [[Slot1], [Slot2],...], cada slot contendo as 10 melhores runas. Primeiramente realizamos todas as combinações possíveis com a função sequence. Depois, criamos uma lista de tupla, com o primeiro elemento da tupla sendo um conjunto de runas e o segundo sendo o somatório do status desejado dela. Depois vamos comparar os segundos elementos de pares de tuplas = maximumBy aplicado com a função (comparing snd).
+Nesse momento, terminamos as filtragens das runas, chamando a função realiza combinação. Essa é a função mais complicada do código, ela recebe uma lista de runas, do tipo [[Slot1], [Slot2],...], cada slot contendo as 10 melhores runas. Primeiramente realizamos todas as combinações possíveis com a função sequence. 
+
+Depois, criamos uma lista de tupla, com o primeiro elemento da tupla sendo um conjunto de runas e o segundo sendo o somatório do status desejado dela. Depois vamos comparar os segundos elementos de pares de tuplas = maximumBy aplicado com a função (comparing snd).
 ```haskell
     realiza_combinação :: [[Rune]] -> String -> [Rune]  
     realiza_combinação runas stat = 
@@ -159,6 +170,7 @@ Abrir index.html
 https://github.com/elc117/perso-2024b-luizamanoelle/tree/main
 https://github.com/elc117/perso-2024b-fennerspohr/tree/main
 https://www.youtube.com/watch?v=nJq9Wv0HDEA
+
 https://www.youtube.com/watch?v=KCrCazaRHUA&t=818s
 https://www.youtube.com/@vlogize
 Programação Funcional em Haskell - Curso UFABC https://www.youtube.com/playlist?list=PLYItvall0TqJ25sVTLcMhxsE0Hci58mpQ
